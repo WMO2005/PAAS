@@ -4,7 +4,7 @@ trigger:
 pool:
   name: Default # Nome do agent pool
   demands:
-    - Agent.Name -equals ag001  # Força o uso do agente específico
+    - Agent.Name -equals LML001  # Força o uso do agente específico - informar o nome do Agente criado
   vmImage: 'windows-latest'
 
 variables:
@@ -21,7 +21,7 @@ stages:
     - task: AzureResourceManagerTemplateDeployment@3
       inputs:
         deploymentScope: 'Resource Group'
-        azureResourceManagerConnection: 'AZURE_Conn'
+        azureResourceManagerConnection: 'SCll01' #informar o nome do Service Connection criado
         subscriptionId: '75b542e1-4e29-46e3-84e4-a024586c6e4a'
         action: 'Create Or Update Resource Group'
         resourceGroupName: '$(resourceGroupName)'
@@ -38,7 +38,7 @@ stages:
     steps:
     - task: AzureWebApp@1
       inputs:
-        azureSubscription: 'AZURE_Conn'
+        azureSubscription: 'SCll01' #informar o nome do Service Connection criado
         appType: 'webApp'
         appName: 'lmliacpaas001'
         package: 'src'
